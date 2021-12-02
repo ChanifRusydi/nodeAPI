@@ -19,5 +19,8 @@ app.get('/sum/firstnumber/:number1/secondnumber/:number2/thirdnumber', (req, res
 app.get('/substract/:number1/:number2', (req, res) => {
     result=parseInt(req.params.number1)-parseInt(req.params.number2);
     res.json({"data":req.params,"result":result});
-    
+});
+app.get('/divide/:number/:number2', (req, res) => {  //number2 is optional
+    result=parseInt(req.params.number1)/parseInt(req.params.number2);
+    res.json({"data":req.params,"result":result});
 });
