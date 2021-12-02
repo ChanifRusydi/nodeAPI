@@ -11,7 +11,7 @@ app.get('/:number1/:number2', (req, res) => {
     res.send(req.params);
 });
 
-app.get('/sum/firstnumber/:number1/secondnumber/:number2/thirdnumber', (req, res) => {
+app.get('/sum/firstnumber/:number1/secondnumber/:number2', (req, res) => {
     result=parseInt(req.params.number1)+parseInt(req.params.number2);
     res.json({"data":req.params,"result":result});
 });
@@ -21,3 +21,4 @@ app.get('/substract/:number1/:number2', (req, res) => {
     res.json({"data":req.params,"result":result});
     
 });
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
