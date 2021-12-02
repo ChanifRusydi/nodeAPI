@@ -19,11 +19,8 @@ app.get('/sum/firstnumber/:number1/secondnumber/:number2', (req, res) => {
 app.get('/substract/:number1/:number2', (req, res) => {
     result=parseInt(req.params.number1)-parseInt(req.params.number2);
     res.json({"data":req.params,"result":result});
-<<<<<<< HEAD
-    
 });
-=======
-});
+
 app.get('/divide/:number/:number2', (req, res) => {  //number2 is optional
     result=parseInt(req.params.number1)/parseInt(req.params.number2);
     res.json({"data":req.params,"result":result});
@@ -33,5 +30,4 @@ app.get('/multiply/:number1/:number2', (req, res) => {
     res.json({"data":req.params,"result":result});
 });
 
->>>>>>> f5e8d8c6930a388dfaa044b87fc205f32b16dc65
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
