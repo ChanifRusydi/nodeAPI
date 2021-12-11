@@ -16,3 +16,14 @@ const db = mysql.createConnection({
 
 app.post('/api/post', (req, res) => {
     let sql = 'INSERT INTO posts (user_id, post_text) VALUES (?, ?)';
+
+app.get('/api/posts', (req, res) => {
+    let sql = 'SELECT * FROM posts';
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.json({status: 'success', data: result, message: 'Posts fetched'});
+    });
+});
+
+app.get('/api/posts/:id', (req, res) => {
+    let sql = 'SELECT * FROM posts WHERE id = ?';
