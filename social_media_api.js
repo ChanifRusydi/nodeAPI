@@ -28,7 +28,10 @@ app.get('/api/posts', (req, res) => {
 app.get('/api/posts/:id', (req, res) => {
     let sql = 'SELECT * FROM posts WHERE id = ?';
     db.query(sql, [req.params.id], (err, result) => {
-
+        if (err) throw err;
+        res.json({status: 'success', data: result, message: 'Posts fetched'});
+    });
+});
     
 app.put('/api/posts/:id', (req, res) => {
     let sql = 'UPDATE posts SET post_text = ? WHERE id = ?';
@@ -36,7 +39,7 @@ app.put('/api/posts/:id', (req, res) => {
         if (err) throw err;
         res.json({status: 'success', message: 'Post updated'});
     });
-}
+});
 
 
 app.delete('/api/posts/:id', (req, res) => {
@@ -45,6 +48,6 @@ app.delete('/api/posts/:id', (req, res) => {
         if (err) throw err;
         res.json({status: 'success', message: 'Post deleted'});
     });
-}
-app.use(express.static('public'));
+});
+app.use('/images',express.static('images'));
 app.listen(port, () => console.log(`Listening on port ${port}`));
