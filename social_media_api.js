@@ -27,3 +27,24 @@ app.get('/api/posts', (req, res) => {
 
 app.get('/api/posts/:id', (req, res) => {
     let sql = 'SELECT * FROM posts WHERE id = ?';
+    db.query(sql, [req.params.id], (err, result) => {
+
+    
+app.put('/api/posts/:id', (req, res) => {
+    let sql = 'UPDATE posts SET post_text = ? WHERE id = ?';
+    db.query(sql, [req.body.post_text, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.json({status: 'success', message: 'Post updated'});
+    });
+}
+
+
+app.delete('/api/posts/:id', (req, res) => {
+    let sql = 'DELETE FROM posts WHERE id = ?';
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.json({status: 'success', message: 'Post deleted'});
+    });
+}
+app.use(express.static('public'));
+app.listen(port, () => console.log(`Listening on port ${port}`));
