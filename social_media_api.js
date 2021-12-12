@@ -16,7 +16,12 @@ const db = mysql.createConnection({
 
 app.post('/api/post', (req, res) => {
     let sql = 'INSERT INTO posts (user_id, post_text) VALUES (?, ?)';
-
+    let values = [req.body.user_id, req.body.post_text];
+    db.query(sql, values, (err, result) => {
+        if (err) { throw err; }
+        res.send(result);
+    });
+});
 app.get('/api/posts', (req, res) => {
     let sql = 'SELECT * FROM posts';
     db.query(sql, (err, result) => {
