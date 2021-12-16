@@ -15,11 +15,13 @@ const db = mysql.createConnection({
 });
 
 app.post('/api/post', (req, res) => {
-    let sql = 'INSERT INTO posts (user_id, post_text) VALUES (?, ?)';
+    let sql = 'INSERT INTO posts SET post_date=NOW()'
+    +",username='"+req.body.username
+    +"', post="+req.body.post_text+"'";
     let values = [req.body.user_id, req.body.post_text];
     db.query(sql, values, (err, result) => {
-        if (err) { throw err; }
-        res.send(result);
+        if (err) throw err; 
+        res.json({ "status": 200, "message": "Post created", "data": null });
     });
 });
 app.get('/api/posts', (req, res) => {
