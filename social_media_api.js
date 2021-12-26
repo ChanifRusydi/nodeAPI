@@ -23,7 +23,7 @@ app.post('/posts', (req, res) => {
         res.json({ "status": 200, "message": "Post created", "data": null });
     });
 });
-app.get('/api/posts', (req, res) => {
+app.get('/posts', (req, res) => {
     let sql = 'SELECT post_id, username, post, DATE_FORMAT(post_date, "%d-%m-%Y") AS post_date FROM posts';
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -31,8 +31,8 @@ app.get('/api/posts', (req, res) => {
     });
 });
 
-app.get('/api/posts/:id', (req, res) => {
-    let sql = "SELECT post_id, username, post, DATE_FORMAT(post_date, "%d-%m-%Y") AS post_date FROM posts WHERE username='"+req.params.username+"'";
+app.get('/posts/:id', (req, res) => {
+    let sql = "SELECT post_id, username, post, DATE_FORMAT(post_date, '%d-%m-%Y') AS post_date FROM posts WHERE username=' "+req.params.username+"'";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.json({"status": 200, data: result, message: 'Posts fetched'});
