@@ -11,21 +11,21 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'social_media_db'
+    database: 'sosial_media'
 });
 
-app.post('/api/post', (req, res) => {
+app.post('/posts', (req, res) => {
     let sql = 'INSERT INTO posts SET post_date=NOW()'
-    +",username='"+req.body.username
+    +",username=' "+req.body.username
     +"', post="+req.body.post_text+"'";
-    let values = [req.body.user_id, req.body.post_text];
-    db.query(sql, values, (err, result) => {
+    // let values = [req.body.user_id, req.body.post_text];
+    db.query(sql, (err, result) => {
         if (err) throw err; 
         res.json({ "status": 200, "message": "Post created", "data": null });
     });
 });
 app.get('/api/posts', (req, res) => {
-    let sql = 'SELECT * FROM posts';
+    let sql = 'SELECT post_id, username, post, DATE_FORMAT(post_date, "%d-%m-%Y") AS post_date FROM posts';
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.json({status: 'success', data: result, message: 'Posts fetched'});
@@ -49,8 +49,8 @@ app.put('/api/posts/:id', (req, res) => {
 });
 
 
-app.delete('/api/posts/:id', (req, res) => {
-    let sql = 'DELETE FROM posts WHERE id = ?';
+app.delete('posts/id:id', (req, res) => {
+    let sql ="DELETE FROM posts WHERE post_id = '"+req.params.id+"'";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.json({status: 'success', message: 'Post deleted'});
