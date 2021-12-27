@@ -11,7 +11,7 @@ const db = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'media_sosial',
-    port: 3306
+    port: '3306'
 });
 //sending data
 app.post('/posts', (req, res) => {
@@ -32,3 +32,4 @@ app.get('/posts', (req, res) => {
         res.json({"status": 200, data: result, message: 'Posts fetched'});
     });
 });
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
