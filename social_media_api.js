@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'sosial_media'
+    database: 'media_sosial'
 });
 
 app.post('/posts', (req, res) => {
