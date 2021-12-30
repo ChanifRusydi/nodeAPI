@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const port = 3000;
+require('dotenv').config();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -13,6 +14,8 @@ const db = mysql.createConnection({
     database: process.env.database,
     port: '3306'
 });
+app.get('/', (req, res) => res.send('This is HTTP method GET'));
+
 //sending data
 app.post('/posts', (req, res) => {
     let sql = 'INSERT INTO posts SET post_date=NOW()'
